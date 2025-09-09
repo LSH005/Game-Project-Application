@@ -24,9 +24,13 @@ public class PlayerMovement : MonoBehaviour
         Vector3 move = new Vector3(x, 0, z);
         chrCont.Move(move * moveSpeed * Time.deltaTime);
 
-        if (isGrounded && Input.GetKey(KeyCode.Space))
+        if (isGrounded)
         {
-            velocity.y = jumpPower;
+            velocity.y = 0f;
+            if (Input.GetKey(KeyCode.Space))
+            {
+                velocity.y = jumpPower;
+            }
         }
 
         velocity.y += gravity * Time.deltaTime;
