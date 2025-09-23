@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
                     Vector3 randomTorqueDirection = Random.insideUnitSphere;
 
                     // 토크를 가해 오브젝트 회전시키기
-                    rb.AddTorque(randomTorqueDirection * GetRandomFloatValue(false) * 10, ForceMode.Impulse);
+                    rb.AddTorque(randomTorqueDirection * GetRandomFloatValue(false) * 100, ForceMode.Impulse);
                 }
                 else Debug.LogError("없?");
 

@@ -1,0 +1,32 @@
+using UnityEngine;
+
+public class EnemySpawner : MonoBehaviour
+{
+    public GameObject enemyPrefab;
+    public float spawnInterval;
+    public float spawnRange = 5;
+    private float timer = 0;
+
+    // Update is called once per frame
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer > spawnInterval)
+        {
+            Vector3 spawnPos = new Vector3(
+                transform.position.x + Random.Range(-spawnRange, spawnRange),
+                transform.position.y,
+                transform.position.z + Random.Range(-spawnRange, spawnRange));
+
+            Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
+
+            timer = 0;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, new Vector3(spawnRange * 2, 0, spawnRange * 2));
+    }
+}
