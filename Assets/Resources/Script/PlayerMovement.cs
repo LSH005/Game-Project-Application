@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("UI")]
+    public Slider slider;
+    [Header("Setting")]
     public float moveSpeed = 5f;
     public float runSpeed = 15;
     public float jumpPower = 5f;
@@ -13,14 +17,17 @@ public class PlayerMovement : MonoBehaviour
 
     public CinemachineVirtualCamera virtualCam;
 
-    private CharacterController chrCont;
-    private Vector3 velocity;
+    public float maxHP;
+
+    private float currrentHP;
     private bool isGrounded = true;
     private bool isPressShift = false;
     private bool wasPressShift = false;
 
     private CinemachinePOV pov;
     private CinemachineSwitcher switcher;
+    private CharacterController chrCont;
+    private Vector3 velocity;
 
 
     void Awake()
@@ -28,6 +35,11 @@ public class PlayerMovement : MonoBehaviour
         chrCont = GetComponent<CharacterController>();
         pov = virtualCam.GetCinemachineComponent<CinemachinePOV>();
         switcher = GetComponent<CinemachineSwitcher>();
+    }
+
+    private void Start()
+    {
+        currrentHP = maxHP;
     }
 
     void Update()
@@ -112,6 +124,17 @@ public class PlayerMovement : MonoBehaviour
 
             wasPressShift = isPressShift;
         }
+
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            pov.m_HorizontalAxis.Value = transform.eulerAngles.y;
+            pov.m_VerticalAxis.Value = 0;
+        }
+
+        if (currrentHP <= 0)
+        {
+            Die();
+        }
     }
 
     private void LateUpdate()
@@ -122,8 +145,19 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public void AddDamage(float value)
+    {
+        currrentHP -= value;
+        slider.value = currrentHP / maxHP;
+    }
+
     float GetRandomFloatValue(bool isABS)
     {
         return isABS ? Random.Range(0.01f, 0.1f) : Random.Range(-0.1f, 0.1f);
+    }
+
+    void Die()
+    {
+        Destroy(gameObject);
     }
 }

@@ -24,7 +24,7 @@ public class PlayerShooting : MonoBehaviour
     {
         if (Input.GetMouseButton(0))
         {
-            if (weaponNumber == 2)
+            if (weaponNumber == 2 || weaponNumber == 0)
             {
                 if (Time.time - lastShootTime >= repeaterCooldown)
                 {

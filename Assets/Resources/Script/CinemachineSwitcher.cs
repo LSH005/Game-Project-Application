@@ -1,6 +1,5 @@
 using Cinemachine;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CinemachineSwitcher : MonoBehaviour
@@ -38,6 +37,7 @@ public class CinemachineSwitcher : MonoBehaviour
         {
             SetFov(100, 1);
         }
+        
     }
 
     public void SetFov(float fov, float duration)

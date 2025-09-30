@@ -70,7 +70,7 @@ public class TrackingProjectile : MonoBehaviour
         if (other.CompareTag("MyLove"))
         {
             Enemy damageScript = other.GetComponent<Enemy>();
-            damageScript.AddDamage(1f);
+            damageScript.AddDamage(2f);
             Destroy(gameObject);
         }
     }
