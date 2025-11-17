@@ -30,7 +30,7 @@ public class EnemyProjectile : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             PlayerMovement damageScript = other.GetComponent<PlayerMovement>();
-            damageScript.AddDamage(damage);
+            //damageScript.AddDamage(damage);
             Destroy(gameObject);
         }
     }
