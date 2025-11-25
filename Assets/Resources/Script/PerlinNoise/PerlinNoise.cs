@@ -1,8 +1,9 @@
-using System.Net.Http.Headers;
 using UnityEngine;
 
 public class PerlinNoise : MonoBehaviour
 {
+    public static PerlinNoise instance { get; private set; }
+
     [Header("기본 블록")]
     public GameObject dirtPrefab;
     public GameObject grassPrefab;
@@ -23,6 +24,18 @@ public class PerlinNoise : MonoBehaviour
     public int waterHeight = 5;
 
     [SerializeField] float noiseScale = 20f;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+        else
+        {
+            Destroy(gameObject);
+            this.enabled = false;
+            return;
+        }
+            
+    }
 
 
     void Start()
@@ -79,6 +92,39 @@ public class PerlinNoise : MonoBehaviour
 
 
         go.name = $"{blockName} : {x} // {y} // {z}";
+    }
+
+    public void SetBlockVector3(Vector3 blockPos, BlockType type)
+    {
+        GameObject setblockTarget = null;
+
+        switch (type)
+        {
+            case BlockType.Dirt:
+                setblockTarget = dirtPrefab;
+                break;
+            case BlockType.Gold:
+                setblockTarget = goldPrefab;
+                break;
+            case BlockType.Water:
+                setblockTarget = waterPrefab;
+                break;
+            case BlockType.Grass:
+                setblockTarget = grassPrefab;
+                break;
+            case BlockType.Coal:
+                setblockTarget = coalPrefab;
+                break;
+        }
+
+        if (setblockTarget != null)
+        {
+            int x = Mathf.FloorToInt(blockPos.x);
+            int y = Mathf.FloorToInt(blockPos.y);
+            int z = Mathf.FloorToInt(blockPos.z);
+
+            SetBlock(x, y, z, setblockTarget);
+        }
     }
 
     bool GetProbability(float percent)

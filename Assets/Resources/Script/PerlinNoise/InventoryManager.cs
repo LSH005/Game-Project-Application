@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -15,10 +14,63 @@ public class InventoryManager : MonoBehaviour
     public Texture2D goldBlock;
     public Texture2D waterBlock;
 
+    private int selectedIndex = -1;
+
     private void Awake()
     {
         if (instance == null) instance = this;
         else Destroy(gameObject);
+    }
+
+    private void Update()
+    {
+        for (int i = 0; i < 7; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                SetSelectedIndex(i);
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Keypad1))
+        {
+            AddItem(BlockType.Grass, 5);
+        }
+    }
+
+    void SetSelectedIndex(int index)
+    {
+        if (index != selectedIndex)
+        {
+            selectedIndex = index;
+
+            foreach (InventorySlot slot in slots)
+            {
+                slot.SetColor(Color.gray);
+            }
+
+            slots[index].SetColor(Color.red);
+        }
+        else
+        {
+            ClearSelect();
+        }
+    }
+
+    public InventorySlot GetSelectedInventorySlot()
+    {
+        if (selectedIndex >= 0) return slots[selectedIndex];
+        else return null;
+    }
+
+    void ClearSelect()
+    {
+        foreach (InventorySlot slot in slots)
+        {
+            slot.SetColor(Color.gray);
+        }
+
+        selectedIndex = -1;
     }
 
     public void AddItem(BlockType blockType, int itemCount)

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c3369b5fa8a21a4aa60a796259bad77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BG: {fileID: 8879297781152982732}
   itemIcon: {fileID: 7449846343996184434}
   itemAmount: {fileID: 4402235942950183231}
   currentBlockType: 0
@@ -77,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0.42070132, b: 0.4218348, a: 1}
+  m_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

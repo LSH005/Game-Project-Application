@@ -1,0 +1,41 @@
+using UnityEngine;
+
+public class LockMouse : MonoBehaviour
+{
+    [Header("시작 잠금 설정")]
+    public bool lockMouseAtStart;
+
+    private bool isMouseLocked = false;
+
+    private void Start()
+    {
+        if (lockMouseAtStart)
+        {
+            LockmodeSwitch();
+        }
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            LockmodeSwitch();
+        }
+    }
+
+    void LockmodeSwitch()
+    {
+        isMouseLocked = !isMouseLocked;
+
+        if (isMouseLocked)
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        else
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+    }
+}

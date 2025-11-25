@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
+    public Image BG;
     public RawImage itemIcon;
     public TextMeshProUGUI itemAmount;
     public BlockType currentBlockType;
@@ -75,5 +76,10 @@ public class InventorySlot : MonoBehaviour
     public void SetIcon(Texture2D icon)
     {
         itemIcon.texture = icon;
+    }
+
+    public void SetColor(Color targetColor)
+    {
+        BG.color = targetColor;
     }
 }
